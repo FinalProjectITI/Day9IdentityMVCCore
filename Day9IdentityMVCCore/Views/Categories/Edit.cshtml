@@ -1,0 +1,42 @@
+﻿@model AdminDashBoard.Models.Category
+
+@{
+    ViewData["Title"] = "الفئات";
+}
+
+<h1>تعديل</h1>
+
+<h4>الفئات</h4>
+<hr />
+<div class="row">
+    <div>
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group col-lg-6">
+                <label>الاسم</label>
+                @*<label asp-for="Name" class="control-label"></label>*@
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group col-lg-6">
+                <label>مسار الصوره</label>
+                @*<label asp-for="ImagePath" class="control-label"></label>*@
+                <input id="in" asp-for="ImagePath" class="form-control" />
+                <span asp-validation-for="ImagePath" class="text-danger"></span>
+            </div>
+            <div class="form-group col-lg-6">
+                <img src="@Model.ImagePath" style="width:200px; height:200px;" class="rounded-circle"/>
+            </div>
+            <br />
+            <div class="form-group col-lg-6">
+                <input type="submit" value="          حفظ          " class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">عوده للفئات</a>
+</div>
+

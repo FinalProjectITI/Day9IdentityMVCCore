@@ -1,0 +1,41 @@
+﻿@model AdminDashBoard.Models.Category
+
+@{
+    ViewData["Title"] = "حذف";
+}
+
+<h1>حذف</h1>
+
+<h3>هل انت متأكد من حذف هذه؟</h3>
+<div>
+    <h4>الفئة</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            الاسم
+            @*@Html.DisplayNameFor(model => model.Name)*@
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt class = "col-sm-2">
+            مسار الصوره
+            @*@Html.DisplayNameFor(model => model.ImagePath)*@
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ImagePath)
+        </dd>
+        <dt class = "col-sm-2">
+            الصوره
+        </dt>
+        <dd class = "col-sm-10">
+            <img src="@Model.ImagePath" style="width:200px; height:200px;" class="rounded-circle"/>
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="Id" />
+        <input type="submit" value="حذف" class="btn btn-danger" /> |
+        <a asp-action="Index">عودة للفئات</a>
+    </form>
+</div>
