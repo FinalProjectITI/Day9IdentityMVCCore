@@ -1,0 +1,78 @@
+﻿@model AdminDashBoard.Models.Product
+
+@{
+    ViewData["Title"] = "إنشاء";
+}
+
+<h1>إنشاء</h1>
+
+<h4>منتج</h4>
+<hr />
+<div class="row">
+    <div class="container">
+        <form asp-action="Create" class="row">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group col-lg-6 col-md-6 col-12">
+                @*<label asp-for="Name" class="control-label"></label>*@
+                <label>الاسم</label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group col-lg-6 col-md-6 col-12">
+                @*<label asp-for="Price" class="control-label"></label>*@
+                <label>السعر</label>
+                <input asp-for="Price" class="form-control" />
+                <span asp-validation-for="Price" class="text-danger"></span>
+            </div>
+            <div class="form-group col-lg-6 col-md-6 col-12">
+                @*<label asp-for="Description" class="control-label"></label>*@
+                <label>الوصف</label>
+                <input asp-for="Description" class="form-control" />
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-group col-lg-6 col-md-6 col-12">
+                @*<label asp-for="Quntity" class="control-label"></label>*@
+                <label>الكميه</label>
+                <input asp-for="Quntity" class="form-control" />
+                <span asp-validation-for="Quntity" class="text-danger"></span>
+            </div>
+            <div class="form-group col-lg-6 col-md-6 col-12">
+                @*<label asp-for="Discount" class="control-label"></label>*@
+                <label>الخصم</label>
+                <input asp-for="Discount" class="form-control" />
+                <span asp-validation-for="Discount" class="text-danger"></span>
+            </div>
+            <div class="form-group col-lg-6 col-md-6 col-12">
+                @*<label asp-for="CategoryId" class="control-label"></label>*@
+                <label>الفنة</label>
+                <select asp-for="CategoryId" class ="form-control" asp-items="ViewBag.CategoryId as SelectList"></select>
+            </div>
+            <div class="form-group col-lg-6 col-md-6 col-12">
+                @*<label asp-for="TypeId" class="control-label"></label>*@
+                <label>النوع</label>
+                <select asp-for="TypeId" class ="form-control" asp-items="ViewBag.TypeId as SelectList"></select>
+            </div>
+            <div class="form-group col-lg-6 col-md-6 col-12">
+                @*<label asp-for="SeasonId" class="control-label"></label>*@
+                <label>الموسم</label>
+                <select asp-for="SeasonId" class ="form-control" asp-items="ViewBag.SeasonId as SelectList"></select>
+            </div>
+            <div class="form-group form-check">
+                
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="ShowInHome" />&nbsp;&nbsp;&nbsp;&nbsp;
+                    <label>الظهور في الواجهه</label>
+                    @*@Html.DisplayNameFor(model => model.ShowInHome)*@
+                </label>
+            </div><br /><br />
+            <div class="form-group">
+                <input type="submit" value="          إنشاء          " class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">العوده للمنتجات</a>
+</div>
+

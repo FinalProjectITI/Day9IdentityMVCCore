@@ -1,0 +1,51 @@
+﻿@model IEnumerable<AdminDashBoard.Models.ProductImage>
+
+@{
+    ViewData["Title"] = "عرض";
+}
+
+<h1>صور المنتجات</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-success">اضافة صوره لمنتج</a>
+</p>
+<table class="table">
+    <thead class="table-dark">
+        <tr>
+            <th>
+                @*@Html.DisplayNameFor(model => model.Product)*@
+                المنتج
+            </th>
+            <th>
+                @*@Html.DisplayNameFor(model => model.Product.Description)*@
+                الوصف
+            </th>
+            <th>
+                الصوره
+                @*@Html.DisplayNameFor(model => model.ImagePath)*@
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Product.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Product.Description)
+            </td>
+            <td>
+                <img src="@item.ImagePath" style="width:50px; height:50px;" class="rounded-circle"/>
+                @*@Html.DisplayFor(modelItem => item.ImagePath)*@
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id"  class="btn btn-dark">تعديل</a> |
+                <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-primary">تفاصيل</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger">حذف</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

@@ -1,8 +1,171 @@
-﻿@{
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+
+@{
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+@if(!SignInManager.IsSignedIn(User))
+{
+    <br><br>
+    <div class="text-center">
+        <h2 class="display-4">مرحبا بكم في</h2><br>
+        <h1>مصنع الأصلي للملابس الجاهزة</h1>
+    </div>
+}
+else
+{
+    <div class="album py-5">
+
+    @*<div class="text-center">
+        <h1>مصنع الأصلي</h1>
+    </div>*@
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 col-lg-4 col-sm-6">
+              <div class="card mb-3 box-shadow csm">
+                  <div class="card-header bg-dark text-white">
+                      <h4 class="card-text text-center">المنتجات</h4>
+                  </div>
+                <div class="card-body">
+                  <h5>عمل</h5>
+                  <h6>عرض, إنشاء, تعديل,</h6>
+                  <h6>وحذف المنتجات</h6>
+                  <div class="d-flex justify-content-between align-items-center"><br />
+                    <div class="btn-group">
+                        <a class="btn btn-sm btn-dark text-white" asp-controller="Products" asp-action="Index">
+                            عرض
+                        </a>
+                        &nbsp;
+                        <a class="btn btn-sm btn-dark text-white" asp-controller="Products" asp-action="Create">
+                            إنشاء
+                        </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-4 col-lg-4 col-sm-6">
+                <div class="card mb-3 box-shadow csm">
+                    <div class="card-header bg-dark text-white">
+                        <h4 class="card-text text-center">صور المنتجات</h4>
+                    </div>
+                <div class="card-body">
+                    <h5>عمل</h5>
+                    <h6>عرض, إنشاء, تعديل,</h6>
+                    <h6>وحذف صور المنتجات</h6>
+                    <div class="d-flex justify-content-between align-items-center"><br />
+                    <div class="btn-group">
+                        <a class="btn btn-sm btn-dark text-white" asp-controller="ProductImages" asp-action="Index">
+                            عرض
+                        </a>
+                        &nbsp;
+                        <a class="btn btn-sm btn-dark text-white" asp-controller="ProductImages" asp-action="Create">
+                            إنشاء
+                        </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-4 col-lg-4 col-sm-6">
+              <div class="card mb-3 box-shadow csm">
+                  <div class="card-header bg-dark text-white">
+                      <h4 class="card-text text-center">المواسم</h4>
+                  </div>
+                <div class="card-body">
+                  <h5>عمل</h5>
+                  <h6>عرض, إنشاء, تعديل,</h6>
+                  <h6>وحذف المواسم</h6>
+                  <div class="d-flex justify-content-between align-items-center"><br />
+                    <div class="btn-group">
+                        <a class="btn btn-sm btn-dark text-white" asp-controller="Seasons" asp-action="Index">
+                            عرض
+                        </a>
+                        &nbsp;
+                        <a class="btn btn-sm btn-dark text-white" asp-controller="Seasons" asp-action="Create">
+                            إنشاء
+                        </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-4 col-lg-4 col-sm-6">
+              <div class="card mb-3 box-shadow csm">
+                  <div class="card-header bg-dark text-white">
+                      <h4 class="card-text text-center">الفئات</h4>
+                  </div>
+                <div class="card-body">
+                  <h5>عمل</h5>
+                  <h6>عرض, إنشاء, تعديل,</h6>
+                  <h6>وحذف الفئات</h6>
+                  <div class="d-flex justify-content-between align-items-center"><br />
+                    <div class="btn-group">
+                        <a class="btn btn-sm btn-dark text-white" asp-controller="Categories" asp-action="Index">
+                            عرض
+                        </a>
+                        &nbsp;
+                        <a class="btn btn-sm btn-dark text-white" asp-controller="Categories" asp-action="Create">
+                            إنشاء
+                        </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-4 col-lg-4 col-sm-6">
+              <div class="card mb-3 box-shadow csm">
+                  <div class="card-header bg-dark text-white">
+                      <h4 class="card-text text-center">الانواع</h4>
+                  </div>
+                <div class="card-body">
+                  <h5>عمل</h5>
+                  <h6>عرض, إنشاء, تعديل,</h6>
+                  <h6>وحذف الانواع</h6>
+                  <div class="d-flex justify-content-between align-items-center"><br />
+                    <div class="btn-group">
+                        <a class="btn btn-sm btn-dark text-white" asp-controller="Types" asp-action="Index">
+                            عرض
+                        </a>
+                        &nbsp;
+                        <a class="btn btn-sm btn-dark text-white" asp-controller="Types" asp-action="Create">
+                            إنشاء
+                        </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-4 col-lg-4 col-sm-6">
+              <div class="card mb-3 box-shadow csm">
+                  <div class="card-header bg-dark text-white">
+                      <h4 class="card-text text-center">الطلبات</h4>
+                  </div>
+                <div class="card-body">
+                  <h5>عمل</h5>
+                  <h6>عرض, تعديل,</h6>
+                  <h6>وحذف الطلبات</h6>
+                  <div class="d-flex justify-content-between align-items-center"><br />
+                    <div class="btn-group">
+                        <a class="btn btn-sm btn-dark text-white" asp-controller="Orders" asp-action="Index">
+                            عرض
+                        </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+        </div>
+    </div>
 </div>
+}
+
+

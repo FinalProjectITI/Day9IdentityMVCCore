@@ -55,9 +55,7 @@ namespace AdminDashBoard.Areas.Identity.Pages.Account
             [Display(Name = "Role")]
             public string Role { get; set; }
 
-            [Required]
-            [Display(Name = "Name")]
-            public string Name { get; set; }
+
 
             [Required]
             [Display(Name = "UserName")]

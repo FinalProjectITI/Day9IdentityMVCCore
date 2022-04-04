@@ -1,0 +1,46 @@
+﻿@model AdminDashBoard.Models.ProductImage
+
+@{
+    ViewData["Title"] = "التفاصيل";
+}
+
+<h1>تفاصيل</h1>
+
+<div>
+    <h4>صوره المنتج</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @*@Html.DisplayNameFor(model => model.Product)*@
+            المنتج
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Product.Name)
+        </dd>
+        <dt class = "col-sm-2">
+            @*@Html.DisplayNameFor(model => model.Product)*@
+            الوصف
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Product.Description)
+        </dd>
+        <dt class = "col-sm-2">
+            @*@Html.DisplayNameFor(model => model.ImagePath)*@
+            مسار الصوره
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ImagePath)
+        </dd>
+        <dt class = "col-sm-2">
+            @*@Html.DisplayNameFor(model => model.ImagePath)*@
+            الصوره
+        </dt>
+        <dd class = "col-sm-10">
+            <img src="@Model.ImagePath" style="width:200px; height:200px;" class="rounded-circle"/>
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id">تعديل</a> |
+    <a asp-action="Index">العوده للصور</a>
+</div>

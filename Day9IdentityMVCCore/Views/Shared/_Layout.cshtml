@@ -1,17 +1,20 @@
 ﻿<!DOCTYPE html>
-<html lang="en">
+<html dir="rtl" lang="ar-eg">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - AdminDashBoard</title>
+    <title>@ViewData["Title"] - مصنع الأصلي</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo&display=swap" rel="stylesheet">
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Employess</a>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-dark border-bottom box-shadow mb-1">
+            <div class="container-fluid">
+                <a class="navbar-brand text-white" asp-area="" asp-controller="Home" asp-action="Index">مصنع الأصلي</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -20,13 +23,25 @@
                     <partial name="_LoginPartial" />
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            <a asp-controller="Home" asp-action="Index" class="btn text-white">الصفحة الرنيسية</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                            <a asp-controller="Products" asp-action="Index" class="btn text-white">المنتجات</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Employees" asp-action="Index">All Employees</a>
+                            <a asp-controller="ProductImages" asp-action="Index" class="btn text-white">صور المنتجات</a>
+                        </li>
+                        <li class="nav-item">
+                            <a asp-controller="Seasons" asp-action="Index" class="btn text-white">المواسم</a>
+                        </li>
+                        <li class="nav-item">
+                            <a asp-controller="Categories" asp-action="Index" class="btn text-white">الفئات</a>
+                        </li>
+                        <li class="nav-item">
+                            <a asp-controller="Types" asp-action="Index" class="btn text-white">الانواع</a>
+                        </li>
+                        <li class="nav-item">
+                            <a asp-controller="Orders" asp-action="Index" class="btn text-white">الطلبات</a>
                         </li>
                     </ul>
                 </div>
@@ -39,9 +54,9 @@
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
+    <footer class="border-top footer text-white bg-dark">
         <div class="container">
-            &copy; 2022 - AdminDashBoard - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+             <b>لوحة تحكم المسئول</b> - <a asp-area="" asp-controller="Home" asp-action="Privacy" class="text-white">الخصوصية</a>
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
