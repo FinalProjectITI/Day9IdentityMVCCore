@@ -1,4 +1,4 @@
-﻿@model AdminDashBoard.Models.Product
+﻿@model AdminDashBoard.ViewModel.ProductImageVM
 
 @{
     ViewData["Title"] = "إنشاء";
@@ -10,7 +10,7 @@
 <hr />
 <div class="row">
     <div class="container">
-        <form asp-action="Create" class="row">
+        <form asp-action="Create" class="row" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group col-lg-6 col-md-6 col-12">
                 @*<label asp-for="Name" class="control-label"></label>*@
@@ -45,29 +45,35 @@
             <div class="form-group col-lg-6 col-md-6 col-12">
                 @*<label asp-for="CategoryId" class="control-label"></label>*@
                 <label>الفنة</label>
-                <select asp-for="CategoryId" class ="form-control" asp-items="ViewBag.CategoryId as SelectList"></select>
+                <select asp-for="CategoryId" class="form-control" asp-items="ViewBag.CategoryId as SelectList"></select>
             </div>
             <div class="form-group col-lg-6 col-md-6 col-12">
                 @*<label asp-for="TypeId" class="control-label"></label>*@
                 <label>النوع</label>
-                <select asp-for="TypeId" class ="form-control" asp-items="ViewBag.TypeId as SelectList"></select>
+                <select asp-for="TypeId" class="form-control" asp-items="ViewBag.TypeId as SelectList"></select>
             </div>
             <div class="form-group col-lg-6 col-md-6 col-12">
                 @*<label asp-for="SeasonId" class="control-label"></label>*@
                 <label>الموسم</label>
-                <select asp-for="SeasonId" class ="form-control" asp-items="ViewBag.SeasonId as SelectList"></select>
+                <select asp-for="SeasonId" class="form-control" asp-items="ViewBag.SeasonId as SelectList"></select>
             </div>
-            <div class="form-group form-check">
-                
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="ShowInHome" />&nbsp;&nbsp;&nbsp;&nbsp;
-                    <label>الظهور في الواجهه</label>
-                    @*@Html.DisplayNameFor(model => model.ShowInHome)*@
-                </label>
-            </div><br /><br />
-            <div class="form-group">
-                <input type="submit" value="          إنشاء          " class="btn btn-primary" />
+            <div class="form-group col-lg-6">
+                <label> الصور</label>
+                <input asp-for="ImagePath" class="form-control" type="file" multiple onchange="loadFile(event)" />
+                <span asp-validation-for="ImagePath" class="text-danger"></span>
             </div>
+            <div id="image">
+                <div class="form-group form-check">
+
+                    <label class="form-check-label">
+                        <input class="form-check-input" asp-for="ShowInHome" />&nbsp;&nbsp;&nbsp;&nbsp;
+                        <label>الظهور في الواجهه</label>
+                        @*@Html.DisplayNameFor(model => model.ShowInHome)*@
+                    </label>
+                </div><br /><br />
+                <div class="form-group">
+                    <input type="submit" value="          إنشاء          " class="btn btn-primary" />
+                </div>
         </form>
     </div>
 </div>
@@ -75,4 +81,25 @@
 <div>
     <a asp-action="Index">العوده للمنتجات</a>
 </div>
+<script>
+    var loadFile = function (event) {
 
+        let text = "";
+        for (let i = 0; i < event.target.files.length; i++) {
+            var img = document.createElement("img");
+            img.src = URL.createObjectURL(event.target.files[i]);
+            document.getElementById("image").innerHTML += text;
+        }
+        //var image = document.getElementById('output1');
+        //image.src = URL.createObjectURL(event.target.files[0]);
+        //var image = document.getElementById('output2');
+        //image.src = URL.createObjectURL(event.target.files[1]);
+        //var image = document.getElementById('output3');
+        //image.src = URL.createObjectURL(event.target.files[2]);
+        //var image = document.getElementById('output4');
+        //image.src = URL.createObjectURL(event.target.files[3]);
+        //var image = document.getElementById('output5');
+        //image.src = URL.createObjectURL(event.target.files[4]);
+
+    };
+</script>

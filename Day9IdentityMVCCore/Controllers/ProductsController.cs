@@ -8,6 +8,9 @@ using Microsoft.EntityFrameworkCore;
 using AdminDashBoard.Models;
 using AdminDashBoard.Data;
 using Microsoft.AspNetCore.Authorization;
+using AdminDashBoard.ViewModel;
+using AdminDashBoard.UploadImages;
+using Microsoft.AspNetCore.Hosting;
 
 namespace AdminDashBoard.Controllers
 {
@@ -15,10 +18,13 @@ namespace AdminDashBoard.Controllers
     public class ProductsController : Controller
     {
        private readonly AlaslyfactoryContext _context;
-
-        public ProductsController(AlaslyfactoryContext context)
+        [Obsolete]
+        public static IHostingEnvironment _environment;
+        [Obsolete]
+        public ProductsController(AlaslyfactoryContext context, IHostingEnvironment environment)
         {
             _context = context;
+            _environment = environment;
         }
 
         // GET: Products
@@ -62,11 +68,35 @@ namespace AdminDashBoard.Controllers
      
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Price,Description,Quntity,Discount,CategoryId,TypeId,SeasonId,ShowInHome")] Product product)
+        [Obsolete]
+        public async Task<IActionResult> Create([Bind("Id,Name,Price,Description,Quntity,Discount,CategoryId,TypeId,SeasonId,ShowInHome,ImagePath")] ProductImageVM product)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(product);
+                Product newproduct = new Product
+                {
+                    Name = product.Name,
+                    Description = product.Description,
+                    Price = product.Price,
+                    Discount = product.Discount,
+                    CategoryId = product.CategoryId,
+                    Quntity = product.Quntity,
+                    SeasonId = product.SeasonId,
+                    ShowInHome = product.ShowInHome,
+                    TypeId = product.TypeId
+                };
+                _context.Add(newproduct);
+                await _context.SaveChangesAsync();
+                foreach (var image in product.ImagePath)
+                {
+                    string path = Images.uploadImage(image, _environment);
+                    ProductImage productImage = new ProductImage()
+                    {
+                        ImagePath = path,
+                        ProductId = newproduct.Id
+                    };
+                    _context.Add(productImage);
+                }
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
