@@ -69,25 +69,25 @@ namespace AdminDashBoard.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Obsolete]
-        public async Task<IActionResult> Create([Bind("Id,Name,Price,Description,Quntity,Discount,CategoryId,TypeId,SeasonId,ShowInHome,ImagePath")] ProductImageVM product)
+        public async Task<IActionResult> Create([Bind("Id,Name,Price,Description,Quntity,Discount,CategoryId,TypeId,SeasonId,ShowInHome,ImagePath")] ProductImageVM productvm)
         {
             if (ModelState.IsValid)
             {
                 Product newproduct = new Product
                 {
-                    Name = product.Name,
-                    Description = product.Description,
-                    Price = product.Price,
-                    Discount = product.Discount,
-                    CategoryId = product.CategoryId,
-                    Quntity = product.Quntity,
-                    SeasonId = product.SeasonId,
-                    ShowInHome = product.ShowInHome,
-                    TypeId = product.TypeId
+                    Name = productvm.Name,
+                    Description = productvm.Description,
+                    Price = productvm.Price,
+                    Discount = productvm.Discount,
+                    CategoryId = productvm.CategoryId,
+                    Quntity = productvm.Quntity,
+                    SeasonId = productvm.SeasonId,
+                    ShowInHome = productvm.ShowInHome,
+                    TypeId = productvm.TypeId
                 };
                 _context.Add(newproduct);
                 await _context.SaveChangesAsync();
-                foreach (var image in product.ImagePath)
+                foreach (var image in productvm.ImagePath)
                 {
                     string path = Images.uploadImage(image, _environment);
                     ProductImage productImage = new ProductImage()
@@ -100,10 +100,10 @@ namespace AdminDashBoard.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Name", product.CategoryId);
-            ViewData["SeasonId"] = new SelectList(_context.Seasons, "Id", "Name", product.SeasonId);
-            ViewData["TypeId"] = new SelectList(_context.Types, "Id", "Name", product.TypeId);
-            return View(product);
+            ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Name", productvm.CategoryId);
+            ViewData["SeasonId"] = new SelectList(_context.Seasons, "Id", "Name", productvm.SeasonId);
+            ViewData["TypeId"] = new SelectList(_context.Types, "Id", "Name", productvm.TypeId);
+            return View(productvm);
         }
 
         // GET: Products/Edit/5
