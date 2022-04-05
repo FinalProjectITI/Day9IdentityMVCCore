@@ -1,0 +1,66 @@
+﻿@model AdminDashBoard.Models.Order
+
+@{
+    ViewData["Title"] = "تعديل";
+}
+
+<h1>تعديل</h1>
+
+<h4>الطلب</h4>
+<hr />
+<div class="row">
+    <div class="container">
+        <form asp-action="Edit" class="row">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="ID" />
+            <div class="form-group col-lg-6 col-md-6 col-12">
+                <label asp-for="UserID" class="control-label">العميل</label>
+                @*<select asp-for="UserID" readonly class="form-control" asp-items="ViewBag.UserID"></select>*@
+                <input readonly asp-for="UserID" class="form-control" value="@ViewBag.UserID" />
+                <span asp-validation-for="UserID" class="text-danger"></span>
+            </div>
+            <div class="form-group col-lg-6 col-md-6 col-12">
+                <label asp-for="CartID" class="control-label">كود السلة</label>
+                @*<select asp-for="CartID" readonly class="form-control" asp-items="ViewBag.CartID"></select>*@
+                <input readonly asp-for="CartID" class="form-control" value="@ViewBag.CartID" />
+                <span asp-validation-for="CartID" class="text-danger"></span>
+            </div>
+            <div class="form-group col-lg-6 col-md-6 col-12">
+                <label asp-for="TotalPrice" class="control-label">اجمالي السعر</label>
+                <input asp-for="TotalPrice" readonly class="form-control" />
+                <span asp-validation-for="TotalPrice" class="text-danger"></span>
+            </div>
+            <div class="form-group col-lg-6 col-md-6 col-12">
+                <label asp-for="status" class="control-label">حالة الطلب</label>
+                @*<select asp-for="status" class="form-control" asp-items="ViewBag.State"></select>*@
+                <input readonly class="form-control" value="@ViewBag.StateName"/>
+                <span asp-validation-for="status" class="text-danger"></span>
+            </div>
+            <div class="form-group col-lg-6 col-md-6 col-12">
+                <label asp-for="Address" class="control-label">العنوان</label>
+                <input asp-for="Address" readonly class="form-control" />
+                <span asp-validation-for="Address" class="text-danger"></span>
+            </div>
+            @*<div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" readonly asp-for="PaymentMethod" /> @Html.DisplayNameFor(model => model.PaymentMethod)
+                </label>
+            </div>*@
+            @if(Model.status < 2)
+            {
+                <div class="form-group col-12">&nbsp;<b> الي الحالة التالية</b>&nbsp;&nbsp;&nbsp;
+                    <input type="submit" value="=> @ViewBag.NextStateName" class="btn btn-success" />
+                </div>
+            }
+            
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">العودة للطلبات</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

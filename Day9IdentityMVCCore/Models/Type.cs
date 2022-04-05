@@ -22,7 +22,6 @@ namespace AdminDashBoard.Models
         [Required]
         [StringLength(200)]
         public string Name { get; set; }
-        [Required]
         public string ImagePath { get; set; }
 
         [InverseProperty(nameof(Product.Type))]

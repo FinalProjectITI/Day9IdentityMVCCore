@@ -1,23 +1,21 @@
 ﻿@model IEnumerable<AdminDashBoard.Models.Season>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "عرض";
 }
 
-<h1>Season</h1>
+<h1>المواسم</h1>
 
 <p>
-    <a asp-action="Create" class="btn btn-success">Add Session</a>
+    <a asp-action="Create" class="btn btn-success">إضافة موسم</a>
 </p>
 <table class="table">
     <thead class="table-dark">
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Name)
+            <th>الاسم
+                @*@Html.DisplayNameFor(model => model.Name)*@
             </th>
-            @*<th>
-                Image
-          </th>*@
+
             <th></th>
         </tr>
     </thead>
@@ -27,13 +25,10 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
-            @*<td>
-                <img src="@item.ImagePath" style="width:50px; height:50px;" />
-           </td>*@
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-dark">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id"class="btn btn-primary">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger">Delete</a>
+                <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-dark">تعديل</a> |
+                <a asp-action="Details" asp-route-id="@item.Id"class="btn btn-primary">تفاصيل</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger">حذف</a>
             </td>
         </tr>
 }

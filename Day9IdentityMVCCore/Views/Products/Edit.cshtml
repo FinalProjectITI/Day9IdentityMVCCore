@@ -1,12 +1,12 @@
 ﻿@model AdminDashBoard.Models.Product
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "تعديل";
 }
 
-<h1>Edit</h1>
+<h1>تعديل</h1>
 
-<h4>Product</h4>
+<h4>منتج</h4>
 <hr />
 <div class="row">
     <div class="container">
@@ -14,59 +14,62 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id" />
             <div class="form-group col-lg-6 col-md-6 col-12">
-                <label asp-for="Name" class="control-label"></label>
+                <label asp-for="Name" class="control-label">الاسم</label>
                 <input asp-for="Name" class="form-control" />
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
             <div class="form-group col-lg-6 col-md-6 col-12">
-                <label asp-for="Price" class="control-label"></label>
+                <label asp-for="Price" class="control-label">السعر</label>
                 <input asp-for="Price" class="form-control" />
                 <span asp-validation-for="Price" class="text-danger"></span>
             </div>
             <div class="form-group col-lg-6 col-md-6 col-12">
-                <label asp-for="Description" class="control-label"></label>
+                <label asp-for="Description" class="control-label">الوصف</label>
                 <input asp-for="Description" class="form-control" />
                 <span asp-validation-for="Description" class="text-danger"></span>
             </div>
             <div class="form-group col-lg-6 col-md-6 col-12">
-                <label asp-for="Quntity" class="control-label"></label>
+                <label asp-for="Quntity" class="control-label">الكمية</label>
                 <input asp-for="Quntity" class="form-control" />
                 <span asp-validation-for="Quntity" class="text-danger"></span>
             </div>
             <div class="form-group col-lg-6 col-md-6 col-12">
-                <label asp-for="Discount" class="control-label"></label>
+                <label asp-for="Discount" class="control-label">الخصم</label>
                 <input asp-for="Discount" class="form-control" />
                 <span asp-validation-for="Discount" class="text-danger"></span>
             </div>
             <div class="form-group col-lg-6 col-md-6 col-12">
-                <label asp-for="CategoryId" class="control-label"></label>
+                <label asp-for="CategoryId" class="control-label">الفئة</label>
                 <select asp-for="CategoryId" class="form-control" asp-items="ViewBag.CategoryId"></select>
                 <span asp-validation-for="CategoryId" class="text-danger"></span>
             </div>
             <div class="form-group col-lg-6 col-md-6 col-12">
-                <label asp-for="TypeId" class="control-label"></label>
+                <label asp-for="TypeId" class="control-label">النوع</label>
                 <select asp-for="TypeId" class="form-control" asp-items="ViewBag.TypeId"></select>
                 <span asp-validation-for="TypeId" class="text-danger"></span>
             </div>
             <div class="form-group col-lg-6 col-md-6 col-12">
-                <label asp-for="SeasonId" class="control-label"></label>
+                <label asp-for="SeasonId" class="control-label">الموسم</label>
                 <select asp-for="SeasonId" class="form-control" asp-items="ViewBag.SeasonId"></select>
                 <span asp-validation-for="SeasonId" class="text-danger"></span>
             </div>
-            <div class="form-group form-check">
+            <div class="form-group form-check col-lg-6 col-md-6 col-12">
                 &nbsp;&nbsp;
                 <label class="form-check-label">
-                    <input class="form-check-input" asp-for="ShowInHome" /> @Html.DisplayNameFor(model => model.ShowInHome)
+                    <input class="form-check-input" asp-for="ShowInHome" />الظهور في الواجهة @*@Html.DisplayNameFor(model => model.ShowInHome)*@
                 </label>
             </div><br /><br />
-            <div class="form-group">
-                <input type="submit" value="          Save          " class="btn btn-primary" />
+            <div class="form-group col-12">
+                <input type="submit" value="          حفظ          " class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">العودة للمنتجات</a>
 </div>
 
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

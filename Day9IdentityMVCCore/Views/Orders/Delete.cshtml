@@ -1,0 +1,57 @@
+﻿@model AdminDashBoard.Models.Order
+
+@{
+    ViewData["Title"] = "حذف";
+}
+
+<h1>حذف</h1>
+
+<h3>هل أنت متأكد من حذف هذا الطلب؟</h3>
+<div class="col-12">
+    <h4>الطلب</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">كود السلة
+            @*@Html.DisplayNameFor(model => model.Cart)*@
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Cart.ID)
+        </dd>
+        <dt class = "col-sm-2">العميل
+            @*@Html.DisplayNameFor(model => model.User)*@
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.User.UserName)
+        </dd>
+        <dt class = "col-sm-2">اجمالي السعر
+            @*@Html.DisplayNameFor(model => model.TotalPrice)*@
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.TotalPrice)
+        </dd>
+        <dt class = "col-sm-2">العنوان
+            @*@Html.DisplayNameFor(model => model.Address)*@
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Address)
+        </dd>
+        <dt class = "col-sm-2">طريقة الدفع
+            @*@Html.DisplayNameFor(model => model.PaymentMethod)*@
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.PaymentMethod)
+        </dd>
+        <dt class = "col-sm-2">حالة الطلب
+            @*@Html.DisplayNameFor(model => model.status)*@
+        </dt>
+        <dd class = "col-sm-10">@ViewBag.StateName
+            @*@Html.DisplayFor(model => model.status)*@
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="ID" />
+        <input type="submit" value="حذف" class="btn btn-danger" /> |
+        <a asp-action="Index">العودة للطلبات</a>
+    </form>
+</div>

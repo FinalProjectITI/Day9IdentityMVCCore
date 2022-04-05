@@ -2,40 +2,33 @@
 @model AdminDashBoard.Models.Type
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "إنشاء";
 }
 
-<h1>Create</h1>
+<h1>إنشاء</h1>
 
-<h4>Type</h4>
+<h4>نوع</h4>
 <hr />
 <div class="row">
-    <div>
-        <form asp-action="Create">
+    <div class="container">
+        <form asp-action="Create" class="row">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group col-lg-6">
-                <label asp-for="Name" class="control-label"></label>
+            <div class="form-group col-lg-6 col-md-6 col-12">
+                <label asp-for="Name" class="control-label">الاسم</label>
                 <input asp-for="Name" class="form-control" />
                 <span asp-validation-for="Name" class="text-danger"></span>
-            </div>
-
-@*            <input type="file" id="File_Upload" name="File" />
-            @Html.EditorFor(model => model.ImagePath, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.ImagePath, "", new { @class = "text-danger" })*@
-
-            <div class="form-group col-lg-6">
-                <label asp-for="ImagePath" class="control-label"></label>
-                <input asp-for="ImagePath" class="form-control" />
-                <span asp-validation-for="ImagePath" class="text-danger"></span>
-            </div><br />
-            <div class="form-group col-lg-6">
-                <input type="submit" value="          Create          " class="btn btn-primary" />
+            </div>><br />
+            <div class="form-group col-12">
+                <input type="submit" value="          إنشاء          " class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">العودة للأنواع</a>
 </div>
 
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

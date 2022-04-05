@@ -58,10 +58,11 @@ namespace AdminDashBoard.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,ImagePath")] Category category)
+        public async Task<IActionResult> Create([Bind("Id,Name")] Category category)
         {
             if (ModelState.IsValid)
             {
+                category.ImagePath = "000";
                 _context.Add(category);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));

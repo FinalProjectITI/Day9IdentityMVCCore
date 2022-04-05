@@ -33,7 +33,7 @@ namespace AdminDashBoard.UploadImages
                     path = path.Trim();
                     using (Stream fileStream = new FileStream(path, FileMode.Create))
                     {
-                        file.CopyToAsync(fileStream);
+                        file.CopyTo(fileStream);
                     }
                     result = "images/" + newFileName;
                     //string path = Path.Combine(Server.MapPath("~/images"), newFileName);
