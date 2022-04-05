@@ -12,6 +12,11 @@ namespace AdminDashBoard.Controllers
 {
     public class OrdersController : Controller
     {
+        List<State> states = new List<State>() { 
+            new State() { Id = 0, Name = "انتظار"},
+            new State() { Id = 1, Name = "تم الشحن"},
+            new State() { Id = 2, Name = "تم التوصيل"},
+        };
         private readonly AlaslyfactoryContext _context;
 
         public OrdersController(AlaslyfactoryContext context)
@@ -42,35 +47,35 @@ namespace AdminDashBoard.Controllers
             {
                 return NotFound();
             }
-
+            ViewData["StateName"] = states.Where(s => s.Id == order.status).First().Name;
             return View(order);
         }
 
         // GET: Orders/Create
-        //public IActionResult Create()
-        //{
-        //    ViewData["CartID"] = new SelectList(_context.Carts, "ID", "UserID");
-        //    ViewData["UserID"] = new SelectList(_context.AspNetUsers, "Id", "Id");
-        //    return View();
-        //}
+        public IActionResult Create()
+        {
+            ViewData["CartID"] = new SelectList(_context.Carts, "ID", "ID");
+            ViewData["UserID"] = new SelectList(_context.AspNetUsers, "Id", "UserName");
+            return View();
+        }
 
-        //// POST: Orders/Create
-        //// To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        //// more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> Create([Bind("ID,UserID,CartID,TotalPrice,status,Address,PaymentMethod")] Order order)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        _context.Add(order);
-        //        await _context.SaveChangesAsync();
-        //        return RedirectToAction(nameof(Index));
-        //    }
-        //    ViewData["CartID"] = new SelectList(_context.Carts, "ID", "UserID", order.CartID);
-        //    ViewData["UserID"] = new SelectList(_context.AspNetUsers, "Id", "Id", order.UserID);
-        //    return View(order);
-        //}
+        // POST: Orders/Create
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
+        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create([Bind("ID,UserID,CartID,TotalPrice,status,Address,PaymentMethod")] Order order)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.Add(order);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            ViewData["CartID"] = new SelectList(_context.Carts, "ID", "ID");
+            ViewData["UserID"] = new SelectList(_context.AspNetUsers, "Id", "UserName");
+            return View(order);
+        }
 
         // GET: Orders/Edit/5
         public async Task<IActionResult> Edit(int? id)
@@ -85,8 +90,17 @@ namespace AdminDashBoard.Controllers
             {
                 return NotFound();
             }
-            ViewData["CartID"] = new SelectList(_context.Carts, "ID", "UserID", order.CartID);
-            ViewData["UserID"] = new SelectList(_context.AspNetUsers, "Id", "Id", order.UserID);
+            //ViewData["State"] = new SelectList(states, "Id", "Name", order.status);
+            if(order.status < 2)
+            {
+                int newState = order.status + 1;
+                ViewData["NextStateName"] = states.Where(s => s.Id == newState).First().Name;
+            }
+            ViewData["StateName"] = states.Where(s => s.Id == order.status).First().Name;
+            //ViewData["CartID"] = new SelectList(_context.Carts, "ID", "UserID", order.CartID);
+            ViewData["CartID"] = order.CartID;
+            //ViewData["UserID"] = new SelectList(_context.AspNetUsers, "Id", "Id", order.UserID);
+            ViewData["UserID"] = _context.AspNetUsers.Where(u => u.Id == order.UserID).First().UserName;
             return View(order);
         }
 
@@ -106,7 +120,10 @@ namespace AdminDashBoard.Controllers
             {
                 try
                 {
-                    _context.Update(order);
+                    //_context.Update(order);
+                    Order order1 = _context.Orders.Find(id);
+                    order1.status += 1;
+                    _context.Update(order1);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
@@ -122,8 +139,13 @@ namespace AdminDashBoard.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CartID"] = new SelectList(_context.Carts, "ID", "UserID", order.CartID);
-            ViewData["UserID"] = new SelectList(_context.AspNetUsers, "Id", "Id", order.UserID);
+            //ViewData["CartID"] = new SelectList(_context.Carts, "ID", "UserID", order.CartID);
+            //ViewData["UserID"] = new SelectList(_context.AspNetUsers, "Id", "Id", order.UserID);
+            int newState = order.status + 1;
+            ViewData["NextStateName"] = states.Where(s => s.Id == newState).First().Name;
+            ViewData["StateName"] = states.Where(s => s.Id == order.status).First().Name;
+            ViewData["CartID"] = order.CartID;
+            ViewData["UserID"] = _context.AspNetUsers.Where(u => u.Id == order.UserID).First().UserName;
             return View(order);
         }
 
@@ -143,7 +165,7 @@ namespace AdminDashBoard.Controllers
             {
                 return NotFound();
             }
-
+            ViewData["StateName"] = states.Where(s => s.Id == order.status).First().Name;
             return View(order);
         }
 
@@ -162,5 +184,9 @@ namespace AdminDashBoard.Controllers
         {
             return _context.Orders.Any(e => e.ID == id);
         }
+    }
+    public class State {
+        public int Id { set; get; }
+        public string Name { set; get; }
     }
 }
