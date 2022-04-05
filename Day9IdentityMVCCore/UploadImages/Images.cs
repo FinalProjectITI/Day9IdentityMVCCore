@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 
@@ -15,7 +16,7 @@ namespace AdminDashBoard.UploadImages
         }
 
         [Obsolete]
-        public static string uploadImage(IFormFile file, IHostingEnvironment _environment)
+        public static async Task<string> uploadImage(IFormFile file, IHostingEnvironment _environment)
         {
             string result;
             string date = DateTime.Now.Date.ToShortDateString();
@@ -31,11 +32,11 @@ namespace AdminDashBoard.UploadImages
                 );
                     string path = Path.Combine(_environment.WebRootPath + ("/images"), newFileName);
                     path = path.Trim();
-                    using (Stream fileStream = new FileStream(path, FileMode.Create))
+                    using (var fileStream = new FileStream(path, FileMode.Create))
                     {
-                        file.CopyTo(fileStream);
+                       await file.CopyToAsync(fileStream);
                     }
-                    result = "images/" + newFileName;
+                    result = path;//"images/" + newFileName;
                     //string path = Path.Combine(Server.MapPath("~/images"), newFileName);
                     //path = path.Trim();
                     //file.SaveAs(path);
@@ -51,6 +52,12 @@ namespace AdminDashBoard.UploadImages
                 result = "You have not specified a file.";
             }
             return result;
+        }
+        [Obsolete]
+        public static void DeleteImage(string path)
+        {
+            if (System.IO.File.Exists(path))
+                System.IO.File.Delete(path);
         }
     }
 }

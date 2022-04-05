@@ -73,7 +73,7 @@ namespace AdminDashBoard.Controllers
         {
             if (ModelState.IsValid)
             {
-                string path = Images.uploadImage(productImagevm.ImagePath[0], _environment);
+                string path = await Images.uploadImage(productImagevm.ImagePath[0], _environment);
                 ProductImage productImage = new ProductImage()
                 {
                     Id = productImagevm.Id,
