@@ -18,6 +18,9 @@
             <th>العميل
                 @*@Html.DisplayNameFor(model => model.User)*@
             </th>
+            <th>رقم الموبايل
+                @*@Html.DisplayNameFor(model => model.User)*@
+            </th>
             <th>اجمالي السعر
                 @*@Html.DisplayNameFor(model => model.TotalPrice)*@
             </th>
@@ -41,6 +44,9 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.User.UserName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Phone)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.TotalPrice)
