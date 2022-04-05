@@ -13,16 +13,16 @@ namespace AdminDashBoard.Models
     {
         [Key]
         [Column("ID")]
-        public int Id { get; set; }
+        public int ID { get; set; }
         [Required]
         [Column("UserID")]
         [StringLength(450)]
-        public string UserId { get; set; }
+        public string UserID { get; set; }
         [Column("CartID")]
-        public int CartId { get; set; }
+        public int CartID { get; set; }
         public double TotalPrice { get; set; }
         [Column("status")]
-        public int Status { get; set; }
+        public int status { get; set; }
         [Required]
         public string Address { get; set; }
         public bool PaymentMethod { get; set; }
@@ -30,10 +30,10 @@ namespace AdminDashBoard.Models
         [StringLength(12)]
         public string Phone { get; set; }
 
-        [ForeignKey(nameof(CartId))]
+        [ForeignKey(nameof(CartID))]
         [InverseProperty("Orders")]
         public virtual Cart Cart { get; set; }
-        [ForeignKey(nameof(UserId))]
+        [ForeignKey(nameof(UserID))]
         [InverseProperty(nameof(AspNetUser.Orders))]
         public virtual AspNetUser User { get; set; }
     }

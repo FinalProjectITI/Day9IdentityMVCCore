@@ -19,7 +19,7 @@ namespace AdminDashBoard.Models
 
         [Key]
         [Column("ID")]
-        public int Id { get; set; }
+        public int ID { get; set; }
         [Required]
         [Column("UserID")]
         [StringLength(450)]

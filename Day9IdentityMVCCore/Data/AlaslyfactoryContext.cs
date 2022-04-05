@@ -111,13 +111,13 @@ namespace AdminDashBoard.Data
 
                 entity.HasOne(d => d.Cart)
                     .WithMany(p => p.Orders)
-                    .HasForeignKey(d => d.CartId)
+                    .HasForeignKey(d => d.CartID)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("CartID_FK");
 
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.Orders)
-                    .HasForeignKey(d => d.UserId)
+                    .HasForeignKey(d => d.UserID)
                     .HasConstraintName("Order_UserID");
             });
 
