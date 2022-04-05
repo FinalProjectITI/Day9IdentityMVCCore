@@ -9,19 +9,22 @@ using Microsoft.EntityFrameworkCore;
 namespace AdminDashBoard.Models
 {
     [Table("Product_In_Cart")]
-    public partial class Product_In_Cart
+    public partial class ProductInCart
     {
         [Key]
-        public int ProductID { get; set; }
+        [Column("ProductID")]
+        public int ProductId { get; set; }
         [Key]
-        public int CartID { get; set; }
-        public int quantity { get; set; }
+        [Column("CartID")]
+        public int CartId { get; set; }
+        [Column("quantity")]
+        public int Quantity { get; set; }
 
-        [ForeignKey(nameof(CartID))]
-        [InverseProperty("Product_In_Carts")]
+        [ForeignKey(nameof(CartId))]
+        [InverseProperty("ProductInCarts")]
         public virtual Cart Cart { get; set; }
-        [ForeignKey(nameof(ProductID))]
-        [InverseProperty("Product_In_Carts")]
+        [ForeignKey(nameof(ProductId))]
+        [InverseProperty("ProductInCarts")]
         public virtual Product Product { get; set; }
     }
 }

@@ -2,17 +2,14 @@
 #nullable disable
 using System;
 using Microsoft.EntityFrameworkCore;
-
+using Microsoft.EntityFrameworkCore.Metadata;
 using AdminDashBoard.Models;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 #nullable disable
 
 namespace AdminDashBoard.Data
 {
-    public partial class AlaslyfactoryContext : DbContext //IdentityDbContext<IdentityUser>
+    public partial class AlaslyfactoryContext : DbContext
     {
         public AlaslyfactoryContext()
         {
@@ -37,16 +34,9 @@ namespace AdminDashBoard.Data
         public virtual DbSet<Order> Orders { get; set; }
         public virtual DbSet<Product> Products { get; set; }
         public virtual DbSet<ProductImage> ProductImages { get; set; }
-        public virtual DbSet<Product_In_Cart> Product_In_Carts { get; set; }
+        public virtual DbSet<ProductInCart> ProductInCarts { get; set; }
         public virtual DbSet<Season> Seasons { get; set; }
-        public virtual DbSet<AdminDashBoard.Models.Type> Types { get; set; }
-
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            if (!optionsBuilder.IsConfigured)
-            {
- }
-        }
+        public virtual DbSet<Models.Type> Types { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -60,19 +50,19 @@ namespace AdminDashBoard.Data
                 entity.Property(e => e.UserName).IsUnicode(false);
             });
 
-            modelBuilder.Entity<AspNetRole>(entity =>
-            {
-                //entity.HasIndex(e => e.NormalizedName, "RoleNameIndex")
-                //    .IsUnique()
-                //    .HasFilter("([NormalizedName] IS NOT NULL)");
-            });
+            //modelBuilder.Entity<AspNetRole>(entity =>
+            //{
+            //    entity.HasIndex(e => e.NormalizedName, "RoleNameIndex")
+            //        .IsUnique()
+            //        .HasFilter("([NormalizedName] IS NOT NULL)");
+            //});
 
-            modelBuilder.Entity<AspNetUser>(entity =>
-            {
-                //entity.HasIndex(e => e.NormalizedUserName, "UserNameIndex")
-                //    .IsUnique()
-                //    .HasFilter("([NormalizedUserName] IS NOT NULL)");
-            });
+            //modelBuilder.Entity<AspNetUser>(entity =>
+            //{
+            //    entity.HasIndex(e => e.NormalizedUserName, "UserNameIndex")
+            //        .IsUnique()
+            //        .HasFilter("([NormalizedUserName] IS NOT NULL)");
+            //});
 
             modelBuilder.Entity<AspNetUserLogin>(entity =>
             {
@@ -93,47 +83,48 @@ namespace AdminDashBoard.Data
             {
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.Carts)
-                    .HasForeignKey(d => d.UserID)
+                    .HasForeignKey(d => d.UserId)
                     .HasConstraintName("Cart_UserID");
             });
 
             modelBuilder.Entity<Favourit>(entity =>
             {
-                entity.HasKey(e => new { e.ProductID, e.UserID })
+                entity.HasKey(e => new { e.ProductId, e.UserId })
                     .HasName("Favourit_PK");
 
                 entity.HasOne(d => d.Product)
                     .WithMany(p => p.Favourits)
-                    .HasForeignKey(d => d.ProductID)
+                    .HasForeignKey(d => d.ProductId)
                     .HasConstraintName("Favourit_ProductID");
 
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.Favourits)
-                    .HasForeignKey(d => d.UserID)
+                    .HasForeignKey(d => d.UserId)
                     .HasConstraintName("Favourit_UserID");
             });
 
             modelBuilder.Entity<Order>(entity =>
             {
+                entity.Property(e => e.Phone)
+                    .IsUnicode(false)
+                    .IsFixedLength(true);
+
                 entity.HasOne(d => d.Cart)
                     .WithMany(p => p.Orders)
-                    .HasForeignKey(d => d.CartID)
+                    .HasForeignKey(d => d.CartId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("CartID_FK");
 
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.Orders)
-                    .HasForeignKey(d => d.UserID)
+                    .HasForeignKey(d => d.UserId)
                     .HasConstraintName("Order_UserID");
             });
 
             modelBuilder.Entity<Product>(entity =>
             {
                 entity.Property(e => e.Discount).HasDefaultValueSql("((0))");
-                entity.HasOne(d => d.Category).WithMany(p => p.Products)
-                .HasForeignKey(d => d.CategoryId);
-                
-               
+
                 entity.HasOne(d => d.Category)
                     .WithMany(p => p.Products)
                     .HasForeignKey(d => d.CategoryId)
@@ -158,20 +149,20 @@ namespace AdminDashBoard.Data
                     .HasConstraintName("ProductID_FK");
             });
 
-            modelBuilder.Entity<Product_In_Cart>(entity =>
+            modelBuilder.Entity<ProductInCart>(entity =>
             {
-                entity.HasKey(e => new { e.ProductID, e.CartID })
+                entity.HasKey(e => new { e.ProductId, e.CartId })
                     .HasName("Product_In_Cart_PK");
 
                 entity.HasOne(d => d.Cart)
-                    .WithMany(p => p.Product_In_Carts)
-                    .HasForeignKey(d => d.CartID)
+                    .WithMany(p => p.ProductInCarts)
+                    .HasForeignKey(d => d.CartId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("ProductINCart_CartID_FK");
 
                 entity.HasOne(d => d.Product)
-                    .WithMany(p => p.Product_In_Carts)
-                    .HasForeignKey(d => d.ProductID)
+                    .WithMany(p => p.ProductInCarts)
+                    .HasForeignKey(d => d.ProductId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("ProductINCart_Product_FK");
             });

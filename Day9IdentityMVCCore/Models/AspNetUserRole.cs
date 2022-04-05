@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace AdminDashBoard.Models
 {
-   // [Index(nameof(RoleId), Name = "IX_AspNetUserRoles_RoleId")]
+    [Index(nameof(RoleId), Name = "IX_AspNetUserRoles_RoleId")]
     public partial class AspNetUserRole
     {
         [Key]

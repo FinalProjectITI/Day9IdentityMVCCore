@@ -17,6 +17,7 @@ namespace AdminDashBoard.Models
         }
 
         [Key]
+        [Column("ID")]
         public int Id { get; set; }
         [Required]
         [StringLength(200)]

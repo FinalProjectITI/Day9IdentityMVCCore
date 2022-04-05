@@ -15,10 +15,11 @@ namespace AdminDashBoard.Models
         {
             Favourits = new HashSet<Favourit>();
             ProductImages = new HashSet<ProductImage>();
-            Product_In_Carts = new HashSet<Product_In_Cart>();
+            ProductInCarts = new HashSet<ProductInCart>();
         }
 
         [Key]
+        [Column("ID")]
         public int Id { get; set; }
         [Required]
         [StringLength(200)]
@@ -28,8 +29,11 @@ namespace AdminDashBoard.Models
         public string Description { get; set; }
         public int Quntity { get; set; }
         public double? Discount { get; set; }
+        [Column("CategoryID")]
         public int CategoryId { get; set; }
+        [Column("TypeID")]
         public int TypeId { get; set; }
+        [Column("SeasonID")]
         public int SeasonId { get; set; }
         public bool ShowInHome { get; set; }
 
@@ -46,7 +50,7 @@ namespace AdminDashBoard.Models
         public virtual ICollection<Favourit> Favourits { get; set; }
         [InverseProperty(nameof(ProductImage.Product))]
         public virtual ICollection<ProductImage> ProductImages { get; set; }
-        [InverseProperty(nameof(Product_In_Cart.Product))]
-        public virtual ICollection<Product_In_Cart> Product_In_Carts { get; set; }
+        [InverseProperty(nameof(ProductInCart.Product))]
+        public virtual ICollection<ProductInCart> ProductInCarts { get; set; }
     }
 }

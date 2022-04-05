@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace AdminDashBoard.Models
 {
-    //[Index(nameof(UserId), Name = "IX_AspNetUserClaims_UserId")]
+    [Index(nameof(UserId), Name = "IX_AspNetUserClaims_UserId")]
     public partial class AspNetUserClaim
     {
         [Key]

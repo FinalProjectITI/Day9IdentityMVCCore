@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace AdminDashBoard.Models
 {
-    //[Index(nameof(NormalizedEmail), Name = "EmailIndex")]
+    [Index(nameof(NormalizedEmail), Name = "EmailIndex")]
     public partial class AspNetUser
     {
         public AspNetUser()

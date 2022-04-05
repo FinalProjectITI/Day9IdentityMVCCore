@@ -12,21 +12,28 @@ namespace AdminDashBoard.Models
     public partial class Order
     {
         [Key]
-        public int ID { get; set; }
+        [Column("ID")]
+        public int Id { get; set; }
         [Required]
+        [Column("UserID")]
         [StringLength(450)]
-        public string UserID { get; set; }
-        public int CartID { get; set; }
+        public string UserId { get; set; }
+        [Column("CartID")]
+        public int CartId { get; set; }
         public double TotalPrice { get; set; }
-        public int status { get; set; }
+        [Column("status")]
+        public int Status { get; set; }
         [Required]
         public string Address { get; set; }
         public bool PaymentMethod { get; set; }
+        [Required]
+        [StringLength(12)]
+        public string Phone { get; set; }
 
-        [ForeignKey(nameof(CartID))]
+        [ForeignKey(nameof(CartId))]
         [InverseProperty("Orders")]
         public virtual Cart Cart { get; set; }
-        [ForeignKey(nameof(UserID))]
+        [ForeignKey(nameof(UserId))]
         [InverseProperty(nameof(AspNetUser.Orders))]
         public virtual AspNetUser User { get; set; }
     }
