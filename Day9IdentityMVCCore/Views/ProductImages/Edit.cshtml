@@ -9,17 +9,17 @@
 <h4>صوره المنتج</h4>
 <hr />
 <div class="row">
-    <div class="col-12">
-        <form asp-action="Edit">
+    <div class="container">
+        <form asp-action="Edit" class="row">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id" />
-            <div class="form-group col-lg-6">
+            <div class="form-group col-lg-6 col-md-6 col-12">
                 <label>المنتج</label>
                 @*<label asp-for="ProductId" class="control-label"></label>*@
                 <select asp-for="ProductId" class="form-control" asp-items="ViewBag.ProductId"></select>
                 <span asp-validation-for="ProductId" class="text-danger"></span>
             </div>
-            <div class="form-group col-lg-6">
+            <div class="form-group col-lg-6 col-md-6 col-12">
                 <label>مسار الصوره</label>
                 @*<label asp-for="ImagePath" class="control-label"></label>*@
                 <input asp-for="ImagePath" class="form-control" />
@@ -27,18 +27,18 @@
             </div>
             @if (Model.ImagePath.Contains("http"))
             {
-                <div class="form-group col-lg-6">
+                <div class="form-group col-lg-6 col-md-6 col-12">
                     <img src="@Model.ImagePath" style="width:200px; height:200px;" class="rounded-circle"/>
                 </div>
             }
             else
             {
-                <div class="form-group col-lg-6">
+                <div class="form-group col-lg-6 col-md-6 col-12">
                     <img src="~/@Model.ImagePath" style="width:200px; height:200px;" class="rounded-circle"/>
                 </div>
             }
             
-            <div class="form-group col-lg-6">
+            <div class="form-group col-12">
                 <input type="submit" value="          حفظ          " class="btn btn-primary" />
             </div>
         </form>
@@ -49,3 +49,6 @@
     <a asp-action="Index">العوده للصور</a>
 </div>
 
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
