@@ -1,65 +1,65 @@
 ﻿@model AdminDashBoard.Models.Product
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "التفاصيل";
 }
 
-<h1>Details</h1>
+<h1>التفاصيل</h1>
 
-<div>
-    <h4>Product</h4>
+<div class="col-12">
+    <h4>المنتج</h4>
     <hr />
     <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Name)
+        <dt class = "col-sm-2">الاسم
+            @*@Html.DisplayNameFor(model => model.Name)*@
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Name)
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Price)
+        <dt class = "col-sm-2">السعر
+            @*@Html.DisplayNameFor(model => model.Price)*@
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Price)
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Description)
+        <dt class = "col-sm-2">الوصف
+            @*@Html.DisplayNameFor(model => model.Description)*@
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Description)
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Quntity)
+        <dt class = "col-sm-2">الكمية
+            @*@Html.DisplayNameFor(model => model.Quntity)*@
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Quntity)
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Discount)
+        <dt class = "col-sm-2">الخصم
+            @*@Html.DisplayNameFor(model => model.Discount)*@
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Discount)
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ShowInHome)
+        <dt class = "col-sm-2">الظهور في الواجهة
+            @*@Html.DisplayNameFor(model => model.ShowInHome)*@
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.ShowInHome)
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Category)
+        <dt class = "col-sm-2">الفئة
+            @*@Html.DisplayNameFor(model => model.Category)*@
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Category.Name)
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Season)
+        <dt class = "col-sm-2">الموسم
+            @*@Html.DisplayNameFor(model => model.Season)*@
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Season.Name)
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Type)
+        <dt class = "col-sm-2">النوع
+            @*@Html.DisplayNameFor(model => model.Type)*@
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Type.Name)
@@ -67,6 +67,6 @@
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Edit" asp-route-id="@Model.Id">تعديل</a> |
+    <a asp-action="Index">العودة للمنتجات</a>
 </div>

@@ -11,9 +11,11 @@ namespace AdminDashBoard.Models
     public partial class ProductImage
     {
         [Key]
+        [Column("ID")]
         public int Id { get; set; }
         [Required]
         public string ImagePath { get; set; }
+        [Column("ProductID")]
         public int ProductId { get; set; }
 
         [ForeignKey(nameof(ProductId))]

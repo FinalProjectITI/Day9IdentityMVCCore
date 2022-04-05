@@ -11,14 +11,16 @@ namespace AdminDashBoard.Models
     public partial class Favourit
     {
         [Key]
-        public int ProductID { get; set; }
+        [Column("ProductID")]
+        public int ProductId { get; set; }
         [Key]
-        public string UserID { get; set; }
+        [Column("UserID")]
+        public string UserId { get; set; }
 
-        [ForeignKey(nameof(ProductID))]
+        [ForeignKey(nameof(ProductId))]
         [InverseProperty("Favourits")]
         public virtual Product Product { get; set; }
-        [ForeignKey(nameof(UserID))]
+        [ForeignKey(nameof(UserId))]
         [InverseProperty(nameof(AspNetUser.Favourits))]
         public virtual AspNetUser User { get; set; }
     }

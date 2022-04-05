@@ -1,4 +1,5 @@
 ﻿using AdminDashBoard.Data;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -8,6 +9,7 @@ using System.Threading.Tasks;
 
 namespace AdminDashBoard.Controllers
 {
+    [Authorize]
     public class OrderController : Controller
     {
         // GET: OrderController

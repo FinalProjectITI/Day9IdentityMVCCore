@@ -6,7 +6,7 @@
 
 <h1>Details</h1>
 
-<div>
+<div class="col-12">
     <h4>الفئة</h4>
     <hr />
     <dl class="row">
@@ -23,12 +23,6 @@
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.ImagePath)
-        </dd>
-        <dt class = "col-sm-2">
-            الصوره
-        </dt>
-        <dd class = "col-sm-10">
-            <img src="@Model.ImagePath" style="width:200px; height:200px;" class="rounded-circle"/>
         </dd>
     </dl>
 </div>

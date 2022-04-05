@@ -14,22 +14,24 @@ namespace AdminDashBoard.Models
         public Cart()
         {
             Orders = new HashSet<Order>();
-            Product_In_Carts = new HashSet<Product_In_Cart>();
+            ProductInCarts = new HashSet<ProductInCart>();
         }
 
         [Key]
+        [Column("ID")]
         public int ID { get; set; }
         [Required]
+        [Column("UserID")]
         [StringLength(450)]
-        public string UserID { get; set; }
+        public string UserId { get; set; }
         public bool AddedToOrder { get; set; }
 
-        [ForeignKey(nameof(UserID))]
+        [ForeignKey(nameof(UserId))]
         [InverseProperty(nameof(AspNetUser.Carts))]
         public virtual AspNetUser User { get; set; }
         [InverseProperty(nameof(Order.Cart))]
         public virtual ICollection<Order> Orders { get; set; }
-        [InverseProperty(nameof(Product_In_Cart.Cart))]
-        public virtual ICollection<Product_In_Cart> Product_In_Carts { get; set; }
+        [InverseProperty(nameof(ProductInCart.Cart))]
+        public virtual ICollection<ProductInCart> ProductInCarts { get; set; }
     }
 }

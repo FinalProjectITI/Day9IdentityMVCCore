@@ -17,11 +17,11 @@ namespace AdminDashBoard.Models
         }
 
         [Key]
+        [Column("ID")]
         public int Id { get; set; }
         [Required]
         [StringLength(200)]
         public string Name { get; set; }
-        [Required]
         public string ImagePath { get; set; }
 
         [InverseProperty(nameof(Product.Type))]
