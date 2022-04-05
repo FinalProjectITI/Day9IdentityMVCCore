@@ -89,7 +89,7 @@ namespace AdminDashBoard.Controllers
                 await _context.SaveChangesAsync();
                 foreach (var image in product.ImagePath)
                 {
-                    string path = Images.uploadImage(image, _environment);
+                    string path =await Images.uploadImage(image, _environment);
                     ProductImage productImage = new ProductImage()
                     {
                         ImagePath = path,
@@ -187,9 +187,15 @@ namespace AdminDashBoard.Controllers
         // POST: Products/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Obsolete]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var product = await _context.Products.FindAsync(id);
+            var images = await _context.ProductImages.Where(I => I.ProductId == id).ToListAsync();
+            foreach(var item in images)
+            {
+                Images.DeleteImage(item.ImagePath);
+            }
             _context.Products.Remove(product);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
