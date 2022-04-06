@@ -36,7 +36,7 @@ namespace AdminDashBoard.UploadImages
                     {
                        await file.CopyToAsync(fileStream);
                     }
-                    result = path;//"images/" + newFileName;
+                    result = "http://furnish-001-site1.btempurl.com/images/" + newFileName;//"images/" + newFileName;
                     //string path = Path.Combine(Server.MapPath("~/images"), newFileName);
                     //path = path.Trim();
                     //file.SaveAs(path);
