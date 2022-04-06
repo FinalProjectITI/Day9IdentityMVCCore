@@ -87,7 +87,7 @@ namespace AdminDashBoard.Controllers
        
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,ImagePath")] Models.Type @type)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name")] Models.Type @type)
         {
             if (id != @type.Id)
             {
@@ -98,6 +98,7 @@ namespace AdminDashBoard.Controllers
             {
                 try
                 {
+                    @type.ImagePath = "000";
                     _context.Update(@type);
                     await _context.SaveChangesAsync();
                 }
