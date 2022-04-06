@@ -88,7 +88,7 @@ namespace AdminDashBoard.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,ImagePath")] Season season)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name")] Season season)
         {
             if (id != season.Id)
             {
